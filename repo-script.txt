@@ -1,0 +1,446 @@
+PS /home/lmaldonado> echo $acr
+az204-acr
+
+
+
+PS /home/lmaldonado> az acr create -n $acr -g $rg -l $loc --sku Basic
+Parameter 'registry_name' must conform to the following pattern: '^[a-zA-Z0-9]*$'.
+PS /home/lmaldonado> $acr=az204acr
+az204acr: The term 'az204acr' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS /home/lmaldonado> $acr="az204acr"
+PS /home/lmaldonado> az acr create -n $acr -g $rg -l $loc --sku Basic
+Resource provider 'Microsoft.ContainerRegistry' used by this operation is not registered. We are registering for you.
+Registration succeeded.
+(AlreadyInUse) The reaz acr create -n $acr -g $rg -l $loc --sku Basicn use. You can check if the name is already claimed using following API: https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/checknameavailability
+{
+"adminUserEnabled": false,me az204acr.azurecr.io is already in use. You can check if the name is already claimed using following API: https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/checknameavailability
+"anonymousPullEnabled": false,te -n $acr -g $rg -l $loc --sku Basic
+"creationDate": "2022-01-18T08:37:50.858154+00:00",
+"dataEndpointEnabled": false,
+"dataEndpointHostNames": [],
+"encryption": {
+"keyVaultProperties": null,
+"status": "disabled"
+},
+"id": "/subscriptions/272a51ac-d63a-4e0b-bfa8-3a2cca1a0fbe/resourceGroups/az204-acr-rg/providers/Microsoft.ContainerRegistry/registries/az204acrlmaldonado",
+"identity": null,
+"location": "eastus",
+"loginServer": "az204acrlmaldonado.azurecr.io",
+"name": "az204acrlmaldonado",
+"networkRuleBypassOptions": "AzureServices",
+"networkRuleSet": null,
+"policies": {
+"exportPolicy": {
+"status": "enabled"
+},
+"quarantinePolicy": {
+"status": "disabled"
+},
+"retentionPolicy": {
+"days": 7,
+"lastUpdatedTime": "2022-01-18T08:37:52.127004+00:00",
+"status": "disabled"
+},
+"trustPolicy": {
+"status": "disabled",
+"type": "Notary"
+}
+},
+"privateEndpointConnections": [],
+"provisioningState": "Succeeded",
+"publicNetworkAccess": "Enabled",
+"resourceGroup": "az204-acr-rg",
+"sku": {
+"name": "Basic",
+"tier": "Basic"
+},
+"status": null,
+"systemData": {
+"createdAt": "2022-01-18T08:37:50.858154+00:00",
+"createdBy": "lmaldonado@mstecs.com",
+"createdByType": "User",
+"lastModifiedAt": "2022-01-18T08:37:50.858154+00:00",
+"lastModifiedBy": "lmaldonado@mstecs.com",
+"lastModifiedByType": "User"
+},
+"tags": {},
+"type": "Microsoft.ContainerRegistry/registries",
+"zoneRedundancy": "Disabled"
+}
+PS /home/lmaldonado> dir
+
+
+
+ Directory: /home/lmaldonado
+
+
+
+UnixMode User Group LastWriteTime Size Name
+-------- ---- ----- ------------- ---- ----
+lrwxrwxrwx lmaldonado lmaldonado 1/18/2022 08:26 22 clouddrive -> /usr/csuser/clouddrive
+
+
+
+PS /home/lmaldonado> mkdir projetImage
+PS /home/lmaldonado> cd ./projetImage/
+PS /home/lmaldonado/projetImage> echo FROM mcr.microsoft.com/hello-world > Dockerfile
+PS /home/lmaldonado/projetImage> dir
+
+
+
+ Directory: /home/lmaldonado/projetImage
+
+
+
+UnixMode User Group LastWriteTime Size Name
+-------- ---- ----- ------------- ---- ----
+-rw-r--r-- lmaldonado lmaldonado 1/18/2022 08:43 35 Dockerfile
+
+
+
+PS /home/lmaldonado/projetImage> nano Dockerfile
+nano ./Dockerfilefile
+PS /home/lmaldonado/projetImage> nano ./Dockerfilefile
+PS /home/lmaldonado/projetImage> echo ./Dockerfile
+./Dockerfile
+PS /home/lmaldonado/projetImage> az acr build --image sample/ananas-sont-delicieux:v1 --registry $acr --file Dockerfile
+the following arguments are required: <SOURCE_LOCATION>
+
+
+
+Examples from AI knowledge base:
+az acr build --image sample/hello-world:{{.Run.ID}} --registry MyRegistry .
+Queue a local context as a Linux build, tag it, and push it to the registry.
+
+
+
+az acr build --registry MyRegistry --file Windows.Dockerfile --platform windows https://github.com/Azure/acr-builder.git
+Queue a remote GitHub context as a Windows build, tag it, and push it to the registry.
+
+
+
+https://docs.microsoft.com/en-US/cli/azure/acr#az_acr_build
+Read more about the command in reference docs
+PS /home/lmaldonado/projetImage> az acr build --image sample/ananas-sont-delicieux:v1 --registry $acr --file Dockerfile .
+Packing source code into tar to upload...
+Uploading archived source code from '/tmp/build_archive_3305ef781ea446728d13157310e7745f.tar.gz'...
+Sending context (280.000 Bytes) to registry: az204acrlmaldonado...
+Queued a build with ID: ca1
+Waiting for an agent...
+2022/01/18 08:46:22 Downloading source code...
+2022/01/18 08:46:23 Finished downloading source code
+2022/01/18 08:46:23 Using acb_vol_e937b13d-9df3-44e8-bb72-24cc5ba9c506 as the home volume
+2022/01/18 08:46:23 Setting up Docker configuration...
+2022/01/18 08:46:24 Successfully set up Docker configuration
+2022/01/18 08:46:24 Logging in to registry: az204acrlmaldonado.azurecr.io
+2022/01/18 08:46:25 Successfully logged into az204acrlmaldonado.azurecr.io
+2022/01/18 08:46:25 Executing step ID: build. Timeout(sec): 28800, Working directory: '', Network: ''
+2022/01/18 08:46:25 Scanning for dependencies...
+2022/01/18 08:46:25 Output from dependency scanning: fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+unable to understand line FROM
+failed to run step ID: build: failed to scan dependencies: exit status 1
+
+
+
+Run ID: ca1 failed after 4s. Error: failed during run, err: exit status 1
+Run failed
+PS /home/lmaldonado/projetImage> nano ./Dockerfilefile
+PS /home/lmaldonado/projetImage> nano ./Dockerfilefile
+PS /home/lmaldonado/projetImage> az acr build --image sample/ananas-sont-delicieux:v1 --registry $acr --file Dockerfile .
+Packing source code into tar to upload...
+Uploading archived source code from '/tmp/build_archive_4bda6a81c4ec492baf7d46cec41e9986.tar.gz'...
+Sending context (309.000 Bytes) to registry: az204acrlmaldonado...
+Queued a build with ID: ca2
+Waiting for an agent...
+2022/01/18 08:47:14 Downloading source code...
+2022/01/18 08:47:15 Finished downloading source code
+2022/01/18 08:47:15 Using acb_vol_c356c7bd-b564-431a-979a-ce72d5198fe4 as the home volume
+2022/01/18 08:47:15 Setting up Docker configuration...
+2022/01/18 08:47:16 Successfully set up Docker configuration
+2022/01/18 08:47:16 Logging in to registry: az204acrlmaldonado.azurecr.io
+2022/01/18 08:47:16 Successfully logged into az204acrlmaldonado.azurecr.io
+2022/01/18 08:47:16 Executing step ID: build. Timeout(sec): 28800, Working directory: '', Network: ''
+2022/01/18 08:47:16 Scanning for dependencies...
+2022/01/18 08:47:17 Output from dependency scanning: fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+unable to understand line FROM
+failed to run step ID: build: failed to scan dependencies: exit status 1
+
+
+
+Run ID: ca2 failed after 4s. Error: failed during run, err: exit status 1
+Run failed
+PS /home/lmaldonado/projetImage> dir
+
+
+
+ Directory: /home/lmaldonado/projetImage
+
+
+
+UnixMode User Group LastWriteTime Size Name
+-------- ---- ----- ------------- ---- ----
+-rw-r--r-- lmaldonado lmaldonado 1/18/2022 08:43 35 Dockerfile
+-rw-r--r-- lmaldonado lmaldonado 1/18/2022 08:47 35 Dockerfilefile
+
+
+
+PS /home/lmaldonado/projetImage> nano ./Dockerfile
+PS /home/lmaldonado/projetImage> az acr build --image sample/ananas-sont-delicieux:v1 --registry $acr --file Dockerfile .
+Packing source code into tar to upload...
+Uploading archived source code from '/tmp/build_archive_a45510a35f144d418dd7192d213ff18b.tar.gz'...
+Sending context (307.000 Bytes) to registry: az204acrlmaldonado...
+Queued a build with ID: ca3
+Waiting for an agent...
+2022/01/18 08:48:25 Downloading source code...
+2022/01/18 08:48:27 Finished downloading source code
+2022/01/18 08:48:27 Using acb_vol_faf2efdd-d206-40f4-9106-ca8b424b28ab as the home volume
+2022/01/18 08:48:27 Setting up Docker configuration...
+2022/01/18 08:48:28 Successfully set up Docker configuration
+2022/01/18 08:48:28 Logging in to registry: az204acrlmaldonado.azurecr.io
+2022/01/18 08:48:28 Successfully logged into az204acrlmaldonado.azurecr.io
+2022/01/18 08:48:28 Executing step ID: build. Timeout(sec): 28800, Working directory: '', Network: ''
+2022/01/18 08:48:28 Scanning for dependencies...
+2022/01/18 08:48:29 Output from dependency scanning: fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+unable to understand line FROM
+failed to run step ID: build: failed to scan dependencies: exit status 1
+
+
+
+Run ID: ca3 failed after 5s. Error: failed during run, err: exit status 1
+Run failed
+PS /home/lmaldonado/projetImage> az acr build --image sample/ananas-sont-delicieux:v1 --registry $acr --file Dockerfilefile
+the following arguments are required: <SOURCE_LOCATION>
+
+
+
+Examples from AI knowledge base:
+az acr build --image sample/hello-world:{{.Run.ID}} --registry MyRegistry .
+Queue a local context as a Linux build, tag it, and push it to the registry.
+
+
+
+az acr build --registry MyRegistry --file Windows.Dockerfile --platform windows https://github.com/Azure/acr-builder.git
+Queue a remote GitHub context as a Windows build, tag it, and push it to the registry.
+
+
+
+https://docs.microsoft.com/en-US/cli/azure/acr#az_acr_build
+Read more about the command in reference docs
+PS /home/lmaldonado/projetImage> az acr build --image sample/ananas-sont-delicieux:v1 --registry $acr --file Dockerfilefile .
+Packing source code into tar to upload...
+Uploading archived source code from '/tmp/build_archive_cd7854577e4d49ec88fc1b12fe7a3632.tar.gz'...
+Sending context (304.000 Bytes) to registry: az204acrlmaldonado...
+Queued a build with ID: ca4
+Waiting for an agent...
+2022/01/18 08:48:41 Downloading source code...
+2022/01/18 08:48:42 Finished downloading source code
+2022/01/18 08:48:42 Using acb_vol_d07ad347-1771-4843-84bc-2cf753dc50ea as the home volume
+2022/01/18 08:48:42 Setting up Docker configuration...
+2022/01/18 08:48:43 Successfully set up Docker configuration
+2022/01/18 08:48:43 Logging in to registry: az204acrlmaldonado.azurecr.io
+2022/01/18 08:48:44 Successfully logged into az204acrlmaldonado.azurecr.io
+2022/01/18 08:48:44 Executing step ID: build. Timeout(sec): 28800, Working directory: '', Network: ''
+2022/01/18 08:48:44 Scanning for dependencies...
+2022/01/18 08:48:44 Successfully scanned dependencies
+2022/01/18 08:48:44 Launching container with name: build
+Sending build context to Docker daemon 4.096kB
+Step 1/1 : From mcr.microsoft.com/hello-world
+latest: Pulling from hello-world
+1b930d010525: Pulling fs layer
+1b930d010525: Verifying Checksum
+1b930d010525: Download complete
+1b930d010525: Pull complete
+Digest: sha256:92c7f9c92844bbbb5d0a101b22f7c2a7949e40f8ea90c8b3bc396879d95e899a
+Status: Downloaded newer image for mcr.microsoft.com/hello-world:latest
+---> fce289e99eb9
+Successfully built fce289e99eb9
+Successfully tagged az204acrlmaldonado.azurecr.io/sample/ananas-sont-delicieux:v1
+2022/01/18 08:48:45 Successfully executed container: build
+2022/01/18 08:48:45 Executing step ID: push. Timeout(sec): 3600, Working directory: '', Network: ''
+2022/01/18 08:48:45 Pushing image: az204acrlmaldonado.azurecr.io/sample/ananas-sont-delicieux:v1, attempt 1
+The push refers to repository [az204acrlmaldonado.azurecr.io/sample/ananas-sont-delicieux]
+af0b15c8625b: Preparing
+af0b15c8625b: Pushed
+v1: digest: sha256:92c7f9c92844bbbb5d0a101b22f7c2a7949e40f8ea90c8b3bc396879d95e899a size: 524
+2022/01/18 08:48:51 Successfully pushed image: az204acrlmaldonado.azurecr.io/sample/ananas-sont-delicieux:v1
+2022/01/18 08:48:51 Step ID: build marked as successful (elapsed time in seconds: 1.641666)
+2022/01/18 08:48:51 Populating digests for step ID: build...
+2022/01/18 08:48:52 Successfully populated digests for step ID: build
+2022/01/18 08:48:52 Step ID: push marked as successful (elapsed time in seconds: 5.910688)
+2022/01/18 08:48:52 The following dependencies were found:
+2022/01/18 08:48:52
+- image:
+registry: az204acrlmaldonado.azurecr.io
+repository: sample/ananas-sont-delicieux
+tag: v1
+digest: sha256:92c7f9c92844bbbb5d0a101b22f7c2a7949e40f8ea90c8b3bc396879d95e899a
+runtime-dependency:
+registry: mcr.microsoft.com
+repository: hello-world
+tag: latest
+digest: sha256:92c7f9c92844bbbb5d0a101b22f7c2a7949e40f8ea90c8b3bc396879d95e899a
+git: {}
+
+
+
+
+Run ID: ca4 was successful after 12s
+PS /home/lmaldonado/projetImage> nano ./Dockerfilefile
+PS /home/lmaldonado/projetImage> nano ./Dockerfile
+PS /home/lmaldonado/projetImage> code .
+PS /home/lmaldonado/projetImage> az acr list
+[
+{
+"adminUserEnabled": false,
+"anonymousPullEnabled": false,
+"creationDate": "2022-01-18T08:37:50.858154+00:00",
+"dataEndpointEnabled": false,
+"dataEndpointHostNames": [],
+"encryption": {
+"keyVaultProperties": null,
+"status": "disabled"
+},
+"id": "/subscriptions/272a51ac-d63a-4e0b-bfa8-3a2cca1a0fbe/resourceGroups/az204-acr-rg/providers/Microsoft.ContainerRegistry/registries/az204acrlmaldonado",
+"identity": null,
+"location": "eastus",
+"loginServer": "az204acrlmaldonado.azurecr.io",
+"name": "az204acrlmaldonado",
+"networkRuleBypassOptions": "AzureServices",
+"networkRuleSet": null,
+"policies": {
+"exportPolicy": {
+"status": "enabled"
+},
+"quarantinePolicy": {
+"status": "disabled"
+},
+"retentionPolicy": {
+"days": 7,
+"lastUpdatedTime": "2022-01-18T08:37:52.127004+00:00",
+"status": "disabled"
+},
+"trustPolicy": {
+"status": "disabled",
+"type": "Notary"
+}
+},
+"privateEndpointConnections": [],
+"provisioningState": "Succeeded",
+"publicNetworkAccess": "Enabled",
+"resourceGroup": "az204-acr-rg",
+"sku": {
+"name": "Basic",
+"tier": "Basic"
+},
+"status": null,
+"systemData": {
+"createdAt": "2022-01-18T08:37:50.858154+00:00",
+"createdBy": "lmaldonado@mstecs.com",
+"createdByType": "User",
+"lastModifiedAt": "2022-01-18T08:37:50.858154+00:00",
+"lastModifiedBy": "lmaldonado@mstecs.com",
+"lastModifiedByType": "User"
+},
+"tags": {},
+"type": "Microsoft.ContainerRegistry/registries",
+"zoneRedundancy": "Disabled"
+}
+]
+PS /home/lmaldonado/projetImage> az acr repository list
+the following arguments are required: --name/-n
+
+
+
+Examples from AI knowledge base:
+az acr repository list --name MyRegistry
+List repositories in a given Azure Container Registry.
+
+
+
+az acr repository list --name MyRegistry --resource-group myresourcegroup
+List repositories in an Azure Container Registry. (autogenerated)
+
+
+
+az acr list --resource-group MyResourceGroup --output table
+List container registries in a resource group and show the results in a table.
+
+
+
+https://docs.microsoft.com/en-US/cli/azure/acr/repository#az_acr_repository_list
+Read more about the command in reference docs
+PS /home/lmaldonado/projetImage> az acr repository list --name $acr
+[
+"sample/ananas-sont-delicieux"
+]
+PS /home/lmaldonado/projetImage> az acr run --registry $acr --cmd '$Registry/sample/ananas-sont-delicieux:v1' /dev/null
+Queued a run with ID: ca5
+Waiting for an agent...
+2022/01/18 08:52:53 Alias support enabled for version >= 1.1.0, please see https://aka.ms/acr/tasks/task-aliases for more information.
+2022/01/18 08:52:53 Creating Docker network: acb_default_network, driver: 'bridge'
+2022/01/18 08:52:53 Successfully set up Docker network: acb_default_network
+2022/01/18 08:52:53 Setting up Docker configuration...
+2022/01/18 08:52:53 Successfully set up Docker configuration
+2022/01/18 08:52:53 Logging in to registry: az204acrlmaldonado.azurecr.io
+2022/01/18 08:52:54 Successfully logged into az204acrlmaldonado.azurecr.io
+2022/01/18 08:52:54 Executing step ID: acb_step_0. Timeout(sec): 600, Working directory: '', Network: 'acb_default_network'
+2022/01/18 08:52:54 Launching container with name: acb_step_0
+Unable to find image 'az204acrlmaldonado.azurecr.io/sample/ananas-sont-delicieux:v1' locally
+v1: Pulling from sample/ananas-sont-delicieux
+1b930d010525: Pulling fs layer
+1b930d010525: Verifying Checksum
+1b930d010525: Download complete
+1b930d010525: Pull complete
+Digest: sha256:92c7f9c92844bbbb5d0a101b22f7c2a7949e40f8ea90c8b3bc396879d95e899a
+Status: Downloaded newer image for az204acrlmaldonado.azurecr.io/sample/ananas-sont-delicieux:v1
+
+
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+
+
+To generate this message, Docker took the following steps:
+1. The Docker client contacted the Docker daemon.
+2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+(amd64)
+3. The Docker daemon created a new container from that image which runs the
+executable that produces the output you are currently reading.
+4. The Docker daemon streamed that output to the Docker client, which sent it
+to your terminal.
+
+
+
+To try something more ambitious, you can run an Ubuntu container with:
+$ docker run -it ubuntu bash
+
+
+
+Share images, automate workflows, and more with a free Docker ID:
+https://hub.docker.com/
+
+
+
+For more examples and ideas, visit:
+https://docs.docker.com/get-started/
+
+
+
+2022/01/18 08:52:55 Successfully executed container: acb_step_0
+2022/01/18 08:52:55 Step ID: acb_step_0 marked as successful (elapsed time in seconds: 1.263653)
+
+
+
+Run ID: ca5 was successful after 4s
+PS /home/lmaldonado/projetImage>
